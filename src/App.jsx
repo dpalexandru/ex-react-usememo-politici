@@ -19,12 +19,22 @@ function App() {
 
   return (
     <>
-      {listaPolitici.map((p, i) => (
-        <div className="card" key={i} >
-          Nome: {p.name}
-        </div>
+      <h1 className='titolo-pagina'>Big Politicians</h1>
+      <div className="cards-container">
 
-      ))}
+        {listaPolitici.map((p, i) => (
+
+          <div className="card" key={i} >
+            <h2 className='card-title'>{p.name}</h2>
+            <img className="card-img" src={p.image} alt="" />
+            <p className='card-position' >Position: {p.position}</p>
+            <p className='card-biography'>Biography: {p.biography}</p>
+
+          </div>
+
+
+        ))}
+      </div>
 
     </>
   )
