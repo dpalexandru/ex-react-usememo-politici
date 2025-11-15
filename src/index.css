@@ -4,10 +4,32 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: #f6f1fd;
+}
+
+/*  H E A D E R  */
+
+header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .titolo-pagina {
   text-align: center;
   margin: 20px;
 }
+
+.capo-ricerca {
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  width: 200px;
+}
+
 
 /*  C  A  R  D  */
 
