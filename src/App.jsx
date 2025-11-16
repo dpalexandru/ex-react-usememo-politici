@@ -23,6 +23,7 @@ function App() {
   //stati
   const [listaPolitici, setListaPolitici] = useState([])
   const [ricerca, setRicerca] = useState("");
+  const [positions, setPosition] = useState("")
 
   //recupero lista politici
   useEffect(() => {
@@ -36,7 +37,18 @@ function App() {
 
   }, [])
 
+  // Creo array posizioni con use memo 
+  const posizioniUniche = useMemo(() => {
+    const result = [];
 
+    listaPolitici.forEach(p => {
+      if (!result.includes(p.position)) {
+        result.push(p.position);
+      }
+    });
+
+    return result;
+  }, [listaPolitici]);
 
 
   // Array politici filtrati con useMemo
@@ -60,6 +72,17 @@ function App() {
           onChange={e => setRicerca(e.target.value)}
 
         />
+        <p className='filtra-posizione'>Filtra per positzione:</p>
+        <select name="" id="select-position"
+          value={positions}
+          onChange={e => setPosition(e.target.value)}
+        >
+          {posizioniUniche.map((p, i) => (
+            <option key={i} value={p}>
+              {p}
+            </option>
+          ))}
+        </select>
       </header>
       <div className="cards-container">
         {listaFiltrati.map((p) => (

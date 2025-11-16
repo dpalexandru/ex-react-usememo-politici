@@ -75,3 +75,15 @@ header {
   line-height: 1.4;
   color: #666;
 }
+
+#select-position {
+  margin: 10px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+}
+
+.filtra-posizione {
+  margin-top: 20px;
+}
