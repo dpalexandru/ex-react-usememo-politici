@@ -39,26 +39,26 @@ function App() {
 
   // Creo array posizioni con use memo 
   const posizioniUniche = useMemo(() => {
-    const result = [];
 
-    listaPolitici.forEach(p => {
-      if (!result.includes(p.position)) {
-        result.push(p.position);
+    return listaPolitici.reduce((acc, p) => {
+      if (!acc.includes(p.position)) {
+        return [...acc, p.position]
       }
-    });
+      return acc;
+    }, [])
 
-    return result;
   }, [listaPolitici]);
 
 
   // Array politici filtrati con useMemo
-  const listaFiltrati = useMemo(
-    () => listaPolitici.filter((p) =>
-      p.name.toLowerCase().includes(ricerca.toLowerCase())
-      || p.biography.toLowerCase().includes(ricerca.toLowerCase())),
-    [listaPolitici, ricerca]
-  );
-
+  const listaFiltrati = useMemo(() =>
+    listaPolitici.filter(p =>
+      (p.name.toLowerCase().includes(ricerca.toLowerCase()) ||
+        p.biography.toLowerCase().includes(ricerca.toLowerCase()))
+      &&
+      (positions === "" || p.position.toLowerCase() === positions.toLowerCase())
+    )
+    , [listaPolitici, ricerca, positions]);
 
   return (
     <>
@@ -77,6 +77,7 @@ function App() {
           value={positions}
           onChange={e => setPosition(e.target.value)}
         >
+          <option value="">Tutti i politici</option>
           {posizioniUniche.map((p, i) => (
             <option key={i} value={p}>
               {p}
