@@ -1,4 +1,22 @@
-import { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
+
+
+//componente card
+function Card({ data }) {
+  console.log("card")
+  const { name, image, position, biography } = data
+  return (< div className="card" >
+    <h2 className='card-title'>{name}</h2>
+    <img className="card-img" src={image} alt="" />
+    <p className='card-position' >Position: {position}</p>
+    <p className='card-biography'>Biography: {biography}</p>
+  </div >
+  )
+}
+
+//componente card versione memoizata
+const MemoizedCard = React.memo(Card)
+
 
 
 function App() {
@@ -19,17 +37,6 @@ function App() {
   }, [])
 
 
-  //componente card
-  function Card({ lista }) {
-    return lista.map((p, i) => (
-      <div className="card" key={i} >
-        <h2 className='card-title'>{p.name}</h2>
-        <img className="card-img" src={p.image} alt="" />
-        <p className='card-position' >Position: {p.position}</p>
-        <p className='card-biography'>Biography: {p.biography}</p>
-      </div>
-    ))
-  }
 
 
   // Array politici filtrati con useMemo
@@ -55,7 +62,13 @@ function App() {
         />
       </header>
       <div className="cards-container">
-        <Card lista={listaFiltrati} />
+        {listaFiltrati.map((p) => (
+          <MemoizedCard
+            data={p}
+            key={p.id}
+          />
+        ))}
+
       </div>
 
     </>
